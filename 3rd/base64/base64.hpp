@@ -18,6 +18,7 @@ inline bool is_base64(const char c)
     return (isalnum(c) || (c == '+') || (c == '/'));
 }
 
+//base64编码，传入要编码的数据和长度，返回编码完成的string
 std::string base64_encode(const char * bytes_to_encode, unsigned int in_len)
 {
     std::string ret;
@@ -68,6 +69,7 @@ std::string base64_encode(const char * bytes_to_encode, unsigned int in_len)
     return ret;
 }
 
+//base64解码，传入要解码的base64串，返回解码后的string
 std::string base64_decode(std::string const & encoded_string)
 {
     int in_len = (int) encoded_string.size();
