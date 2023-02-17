@@ -11,6 +11,12 @@ c++代码工程，个人使用的一个模板
 ### Build
 
 ```shell
+./build.sh [option]
+```
+
+or
+
+```shell
 mkdir build
 cd build
 ##########
@@ -18,7 +24,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE=./toolchains/x64.cmake ..
 #or
 cmake -DCMAKE_TOOLCHAIN_FILE=./toolchains/armhf.cmake ..
 #or
-cmake -DCMAKE_TOOLCHAIN_FILE=./toolchains/aarch.cmake ..
+cmake -DCMAKE_TOOLCHAIN_FILE=./toolchains/aarch64.cmake ..
 #########
 make
 ```
@@ -35,11 +41,16 @@ yaml-cpp打开文件时，如果路径不存在要创建路径、文件
 spdlog：确保多线程状态下功能正常，更多拓展功能（控制台和文件同时写的可能性）
 json库的演示操作、编译是否正常
 cmake控制的头文件
+build.sh功能完善
 ```
 
 
 
 ### 修改记录
+
+#### 2023-02-17
+
+添加了build.sh: 可以简单的根据参数选择目标平台（cmake的toolchain文件）
 
 #### 2022-05-07
 
