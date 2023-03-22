@@ -2,22 +2,23 @@
 #define __CONFIG_HPP
 
 #include "yaml-cpp/yaml.h"
+
 #include <string>
 #include <vector>
 
 #define DEFAULT_CONFIG_FILENAME "./config.yaml"
 
-class configDataType{
+class configDataType {
 public:
-    std::string name  = "";
-    int         age   = 0;
-    double      grade = 0;
+    std::string name    = "";
+    int         age     = 0;
+    double      grade   = 0;
     bool        isHuman = false;
 
     std::vector<int> numbers;
 };
 
-class configType{
+class configType {
 public:
     configType();
     configType(std::string filename);

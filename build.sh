@@ -25,7 +25,7 @@ do
         ;;
     h)
         Usage
-        exit 1
+        exit 0
         ;;
     ?)
         Usage
@@ -33,6 +33,13 @@ do
         ;;
     esac
 done
+
+if [ "$target_platform" = "" ] 
+then
+    echo "The target platform must be specified" >&2
+    Usage
+    exit 1
+fi
 
 echo "----- create directory "
 
