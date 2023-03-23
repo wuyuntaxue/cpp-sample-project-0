@@ -28,17 +28,16 @@ int main() {
     _logger->info("hello spdlog");
 
     // 读写yaml配置文件
-    std::shared_ptr<configType> pConfig = std::make_shared<configType>(DEFAULT_CONFIG_FILENAME);
-    pConfig->read_config_file();
-    pConfig->print_config();
+    configType::Instance().read_config_file("./config.yaml");
+    configType::Instance().print_config();
 
-    pConfig->data.name += "a";
-    pConfig->data.age += 1;
-    pConfig->data.grade += 1.1;
-    pConfig->data.isHuman = !pConfig->data.isHuman;
-    pConfig->data.numbers.push_back(100);
+    configType::Instance().data.name += "a";
+    configType::Instance().data.age += 1;
+    configType::Instance().data.grade += 1.1;
+    configType::Instance().data.isHuman = !configType::Instance().data.isHuman;
+    configType::Instance().data.numbers.push_back(100);
 
-    pConfig->save_config_file();
+    configType::Instance().save_config_file();
     /////////////////
 
     // 日志演示
