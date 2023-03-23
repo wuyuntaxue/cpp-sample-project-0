@@ -24,6 +24,11 @@ public:
     configType(std::string filename);
     ~configType();
 
+    static configType &Instance() {
+        static configType _instance;
+        return _instance;
+    }
+
     void read_config_file(std::string filename);
     void read_config_file();
 

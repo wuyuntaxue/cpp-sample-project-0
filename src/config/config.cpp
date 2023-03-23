@@ -46,6 +46,7 @@ void configType::read_config_file(std::string filename) {
         std::cout << "read file error:" << e.what() << std::endl;
         return;
     }
+    m_filename = filename;
 }
 
 void configType::read_config_file() {
