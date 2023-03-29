@@ -7,20 +7,23 @@ aux_source_directory("${PROJECT_SOURCE_DIR}/src/log/" LOG_SRCS)
 
 add_executable(sample_exe ${PROJECT_SOURCE_DIR}/src/start.cpp ${CONFIG_SRCS} ${LOG_SRCS})
 
+#指定c++版本
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDSRD_REQUIRED True)
-#指定c++版本
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -W")
 #添加编译选项，显示编译过程中的waring
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -W -Werror=return-type")
 
-target_link_libraries(sample_exe PUBLIC -lyaml-cpp)
 #链接库
+target_link_libraries(sample_exe PUBLIC -lyaml-cpp)
 
+#头文件查找目录
 target_include_directories(sample_exe PUBLIC
                             "${PROJECT_SOURCE_DIR}/src"
                             "${PROJECT_SOURCE_DIR}/3rd"
                             "${PROJECT_SOURCE_DIR}/3rd/yaml-cpp/include"
                             "${PROJECT_SOURCE_DIR}/3rd/spdlog/include"
                             )
-#头文件查找目录
+
+#添加子项目
+add_subdirectory(${PROJECT_SOURCE_DIR}/test)
