@@ -1,1 +1,2 @@
 add_subdirectory(test_base64)
+add_subdirectory(test_json)
