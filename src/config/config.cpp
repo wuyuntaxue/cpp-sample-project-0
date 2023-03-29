@@ -17,6 +17,7 @@ configType::~configType() {}
 
 // 读取配置文件，并将配置项赋值到相应变量
 void configType::read_config_file(std::string filename) {
+    m_filename = filename;
     try {
         YAML::Node yml = YAML::LoadFile(filename);
         if (yml["taxue"]) { // 确认节点是否存在
@@ -46,20 +47,22 @@ void configType::read_config_file(std::string filename) {
         std::cout << "read file error:" << e.what() << std::endl;
         return;
     }
-    m_filename = filename;
 }
 
 void configType::read_config_file() {
     read_config_file(m_filename);
 }
 
-// 递归创建多层目录，假设string是正常的，所以此函数存在风险
+// 递归创建多层目录
 int configType::mkdirs(std::string path, mode_t mode) {
     int ret = access(path.c_str(), F_OK);
     if (ret != 0) {
-        auto        loc     = path.rfind("/");
-        std::string subpath = path.substr(0, loc);
+        auto loc = path.rfind("/");
+        if (loc == std::string::npos) {
+            return -1;
+        }
 
+        std::string subpath = path.substr(0, loc);
         if (mkdirs(subpath, mode) != 0) {
             return -1;
         }
@@ -67,8 +70,6 @@ int configType::mkdirs(std::string path, mode_t mode) {
         if (mkdir(path.c_str(), mode) != 0) {
             std::cout << "creat failed" << std::endl;
             return -1;
-        } else {
-            std::cout << "creat success" << std::endl;
         }
     }
     return 0;
