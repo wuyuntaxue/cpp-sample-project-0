@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 
+/*********************************************************/
+
 // 通过重载to_json和from_json
 class FrameStatus {
 public:
@@ -27,7 +29,8 @@ void from_json(const nlohmann::json &j, FrameStatus &p) {
     }
 }
 
-////////////////////////////////////////
+/*********************************************************/
+
 // 不做nlohmann::json相关操作的自定义类型
 class FrameStatus2 {
 public:
@@ -35,8 +38,7 @@ public:
     int width2 = 0;
 };
 
-///////////////////////////////////////
-
+/*********************************************************/
 
 // 使用常规的解析、构建方式
 class MessageType {
@@ -68,28 +70,31 @@ int MessageType::parse_json(std::string &msg) {
         return -1;
     }
 
+    // 字段不存在时直接访问会抛出异常
     if (j.contains("size") && j.at("size").is_number()) {
-        j.at("size").get_to(_size);
+        j["size"].get_to(_size);
+        //or
+        //_size = j["size"];
     }
 
     if (j.contains("name") && j.at("name").is_string()) {
-        j.at("name").get_to(_name);
+        j["name"].get_to(_name);
     }
 
     if (j.contains("val") && j.at("val").is_array()) {
-        j.at("val").get_to(_val);
+        j["val"].get_to(_val);
     }
 
     if (j.contains("num_arr") && j.at("num_arr").is_array()) {
         // 数组需要判断长度再赋值。长度和数组长度不一致时，直接get_to会抛出异常
         for (unsigned int i = 0; i < j.at("num_arr").size(); i++) {
-            _numArr[i] = j.at("num_arr").at(i);
+            j["num_arr"][i].get_to(_numArr[i]);
         }
     }
 
     // 自定义类型已经特例化重载to/from_json
     if (j.contains("status") && j.at("status").is_object()) {
-        j.at("status").get_to(_status);
+        j["status"].get_to(_status);
     }
 
     // 自定义类型未重载to/from_json
@@ -108,9 +113,17 @@ int MessageType::parse_json(std::string &msg) {
 
 nlohmann::json MessageType::construct_json() {
     nlohmann::json j = {
-        {"size", _size},     {"name", _name},
-        {"val", _val},       {"num_arr", _numArr},
-        {"status", _status}, {"status2", {{"len2", _status2.len2}, {"width2", _status2.width2}}}};
+        {"size", _size},
+        {"name", _name},
+        {"val", _val},
+        {"num_arr", _numArr},
+        {"status", _status},
+        {"status2",
+         {
+             {"len2", _status2.len2},
+             {"width2", _status2.width2},
+         }},
+    };
     return j;
 }
 
@@ -135,7 +148,8 @@ void MessageType::print_private_value() {
 
     std::cout << std::endl;
 }
-///
+
+/*********************************************************/
 
 
 int main() {
@@ -158,19 +172,25 @@ int main() {
 
     std::cout << "------------------" << std::endl;
 
-    // TODO，完善从文件读写的演示
-    // 写入文件
-    std::fstream confFile("./test.json");
-    if (confFile.is_open())
-        confFile << jnode;
+    {
+        // 写入文件
+        std::fstream confFile("./test.json", std::fstream::out);
+        if (confFile.is_open()) {
+            confFile << jnode;
+            confFile.close();
+            std::cout << "json file write sucess" << std::endl;
+        }
+    }
 
-    // 以文件流形式读取 json 文件
-    nlohmann::json jtmp;
-    confFile.close();
-    confFile.open("./test.json");
-    confFile >> jtmp;
-    std::cout << jtmp.at("size").get<int>() << " - " << jtmp.at("name").get<std::string>() << std::endl;
+    {
+        // 以文件流形式读取 json 文件
+        nlohmann::json jtmp;
+        std::fstream confFile("./test.json");
 
-    confFile.close();
+        confFile >> jtmp;
+        std::cout << jtmp.at("size").get<int>() << " - " << jtmp.at("name").get<std::string>() << std::endl;
+        confFile.close();
+    }
+    
     return 0;
 }
