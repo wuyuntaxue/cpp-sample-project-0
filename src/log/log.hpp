@@ -7,6 +7,7 @@
 
 void log_init(void);
 void log_drop(void);
+void log_init_tmp(void);
 
 // 避免修改__FILE__宏引起的冲突，使用宏定义，日志中文件名使用相对路径
 #define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1) : __FILE__)

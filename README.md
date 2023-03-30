@@ -34,7 +34,8 @@ make
 ### TODO List
 
 ```
-json库的演示操作、编译是否正常
+spdlog的warn和error封装一下，现在填太多参数，使用不方便
+完善test_log演示代码
 
 获取GitHash，做成宏，用来表示版本编码
 整理buildtime宏中时间格式
@@ -46,6 +47,12 @@ build.sh功能完善
 
 
 ### 修改记录
+
+### 2023-03-30
+
+完善test_json的代码
+
+增加log的test代码，多个sinks的使用（控制台+文件）
 
 #### 2023-03-29
 

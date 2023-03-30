@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDSRD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -W -Werror=return-type")
 
 #链接库
-target_link_libraries(sample_exe PUBLIC -lyaml-cpp)
+target_link_libraries(sample_exe PUBLIC -lyaml-cpp -lpthread)
 
 #头文件查找目录
 target_include_directories(sample_exe PUBLIC
