@@ -34,8 +34,9 @@ make
 ### TODO List
 
 ```
-spdlog的warn和error封装一下，现在填太多参数，使用不方便
-完善test_log演示代码
+
+完善test_log演示代码，研究线程名如何输出到log中，buildtime等
+
 
 获取GitHash，做成宏，用来表示版本编码
 整理buildtime宏中时间格式
@@ -47,6 +48,10 @@ build.sh功能完善
 
 
 ### 修改记录
+
+### 2023-03-21
+
+修改log的使用方式，待完善
 
 ### 2023-03-30
 
