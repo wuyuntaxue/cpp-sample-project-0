@@ -1,3 +1,4 @@
 add_subdirectory(test_base64)
 add_subdirectory(test_json)
 add_subdirectory(test_log)
+add_subdirectory(test_jemalloc)
