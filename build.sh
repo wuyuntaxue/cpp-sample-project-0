@@ -2,13 +2,17 @@
 set -e
 
 function Usage(){
-echo "Usage: ./build.sh [options]
+echo "
+Usage: ./build.sh [options]
 
 Help:
   -h               print this message
 
 Standard options:
-  -p=platform      target platform [x64/aarch64/armhf]
+  -p platform      target platform [x64/aarch64/armhf]
+
+Build thread:
+  -j thread nums   default: $(nproc)
 
 Sample:
   ./build.sh -p x64
@@ -16,12 +20,16 @@ Sample:
 }
 
 target_platform=""
+build_thread=$(nproc)
 
-while getopts "p:h" arg
+while getopts "p:hj:" arg
 do
     case $arg in
     p)
         target_platform=$OPTARG
+        ;;
+    j)
+        build_thread=$OPTARG
         ;;
     h)
         Usage
@@ -63,6 +71,6 @@ echo "----- start build "
 
 cmake_toolchain_$target_platform
 
-make
+make -j ${build_thread}
 
 echo "----- build done"

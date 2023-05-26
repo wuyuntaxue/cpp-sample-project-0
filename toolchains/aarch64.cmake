@@ -9,3 +9,5 @@ link_directories("${PROJECT_SOURCE_DIR}/3rd/yaml-cpp/lib/aarch64/")
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/aarch64)
 #设置可执行文件输出位置
+
+set(PLATFORM "aarch64" CACHE STRING "")
