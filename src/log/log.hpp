@@ -5,11 +5,15 @@
 
 #include <string.h>
 
-std::shared_ptr<spdlog::logger> log_init(void);
+/**
+ * @brief 释放日志
+ * 
+ */
 void log_drop(void);
 
 
-std::shared_ptr<spdlog::logger> __get_log(void);
+/// @brief 不需要调用
+std::shared_ptr<spdlog::logger> &__get_log(void);
 
 // 避免修改__FILE__宏引起的冲突，使用宏定义，日志中文件名使用相对路径
 #define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1) : __FILE__)

@@ -20,7 +20,6 @@ void do_some_log(std::string s1) {
 
 int main() {
     prctl(PR_SET_NAME, "main");
-    log_init(); // 初始化spd日志
 
     LOG_INFO("start test log");
 

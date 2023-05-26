@@ -5,7 +5,7 @@
 
 int main() {
     std::cout << "taxue sample start" << std::endl;
-    log_init(); // 初始化spd日志
+    // log_init(); // 初始化spd日志
     LOG_INFO("start run ... ...");
 
     // 读写yaml配置文件

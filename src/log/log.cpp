@@ -31,7 +31,7 @@ void log_init() {
 
 #endif
 
-std::shared_ptr<spdlog::logger> log_init() {
+static std::shared_ptr<spdlog::logger> log_init() {
     // 一个日志器使用多个SINK，标准控制台输出和日志文件
     std::vector<spdlog::sink_ptr> sinks;
     sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
@@ -52,7 +52,7 @@ void log_drop() {
     spdlog::shutdown();
 }
 
-std::shared_ptr<spdlog::logger> __get_log() {
+std::shared_ptr<spdlog::logger> &__get_log() {
     static std::shared_ptr<spdlog::logger> _logger = spdlog::get(LOG_TAG);
     if (_logger == nullptr) {
         _logger = log_init();
