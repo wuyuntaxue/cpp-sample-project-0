@@ -22,6 +22,9 @@ Sample:
 target_platform=""
 build_thread=$(nproc)
 
+# 是否编译test模块
+is_build_test="YES"
+
 while getopts "p:hj:" arg
 do
     case $arg in
@@ -52,15 +55,21 @@ fi
 echo "----- create directory "
 
 function cmake_toolchain_x64(){
-    cmake -DCMAKE_TOOLCHAIN_FILE=./toolchains/x64.cmake ..
+    cmake -D CMAKE_TOOLCHAIN_FILE=./toolchains/x64.cmake \
+          -D IS_BUILD_TEST=${is_build_test} \
+          ..
 }
 
 function cmake_toolchain_aarch64(){
-    cmake -DCMAKE_TOOLCHAIN_FILE=./toolchains/aarch64.cmake ..
+    cmake -D CMAKE_TOOLCHAIN_FILE=./toolchains/aarch64.cmake \
+          -D IS_BUILD_TEST=${is_build_test} \
+          ..
 }
 
 function cmake_toolchain_armhf(){
-    cmake -DCMAKE_TOOLCHAIN_FILE=./toolchains/armhf.cmake ..
+    cmake -D CMAKE_TOOLCHAIN_FILE=./toolchains/armhf.cmake \
+          -D IS_BUILD_TEST=${is_build_test} \
+          ..
 }
 
 mkdir -p build

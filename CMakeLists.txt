@@ -27,4 +27,7 @@ target_include_directories(sample_exe PUBLIC
                             )
 
 #添加子项目
-add_subdirectory(${PROJECT_SOURCE_DIR}/test)
+message(STATUS "IS_BUILD_TEST : " ${IS_BUILD_TEST})
+if (${IS_BUILD_TEST} MATCHES "YES")
+    add_subdirectory(${PROJECT_SOURCE_DIR}/test)
+endif()
