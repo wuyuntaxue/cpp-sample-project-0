@@ -23,7 +23,7 @@ target_platform=""
 build_thread=$(nproc)
 
 # 是否编译test模块
-is_build_test="TRUE"
+is_build_test="YES"
 
 while getopts "p:hj:" arg
 do

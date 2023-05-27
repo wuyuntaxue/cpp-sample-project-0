@@ -28,6 +28,6 @@ target_include_directories(sample_exe PUBLIC
 
 #添加子项目
 message(STATUS "IS_BUILD_TEST : " ${IS_BUILD_TEST})
-if (${IS_BUILD_TEST} MATCHES "TRUE")
+if (${IS_BUILD_TEST} MATCHES "YES")
     add_subdirectory(${PROJECT_SOURCE_DIR}/test)
 endif()
