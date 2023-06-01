@@ -10,3 +10,7 @@ endif()
 if((${PLATFORM} MATCHES "x64") OR (${PLATFORM} MATCHES "armhf"))
     add_subdirectory(test_sqlite3)
 endif()
+
+if(${PLATFORM} MATCHES "x64")
+    add_subdirectory(test_uuid)
+endif()
