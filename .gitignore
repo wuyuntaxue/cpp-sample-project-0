@@ -1,6 +1,9 @@
 /build/
 /bin/
 /3rd/protobuf*/x64/
+/3rd/protobuf*/armhf/
 /3rd/protobuf*/source/protobuf-3.20.2/
+
+/3rd/sqlite3-3420000/x64/bin/test.db
 
 # '/'开头表示屏蔽是从git根目录开始查找的，不以/开头会循环查找所有子目录对应的内容
