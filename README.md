@@ -28,6 +28,10 @@ make
 ```
 
 
+### 注意事项
+
+- 如果使用protobuf而机器没有安装时，需要进入3rd/protobuf-xxx/目录，手动编译（protobuf的库文件太大，超出github的限制）
+
 
 ### TODO List
 
