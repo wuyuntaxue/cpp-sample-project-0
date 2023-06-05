@@ -3,6 +3,7 @@
 /3rd/protobuf*/x64/
 /3rd/protobuf*/armhf/
 /3rd/protobuf*/source/protobuf-3.20.2/
+/.vscode/settings.json
 
 /3rd/sqlite3-3420000/x64/bin/test.db
 
