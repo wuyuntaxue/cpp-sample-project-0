@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package SCH; //整个文件的包名，对应到C++里是这个文件所有的message类都在这个命名空间里
+
+message Student{
+  //选项 类型 名称 = 标号
+  uint64 id = 1;
+  string name =2;
+  optional string email = 3;
+
+  enum PhoneType {
+      MOBILE = 0;
+      HOME = 1;
+  }
+
+  message PhoneNumber {
+      string number = 1;
+      optional PhoneType type = 2;
+  }
+  repeated PhoneNumber phone = 4;
+
+  message Remark { 
+    string describe = 1;
+    int32  rank = 2;
+  }
+
+  Remark remark = 5;
+}

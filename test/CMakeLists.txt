@@ -14,3 +14,7 @@ endif()
 if(${PLATFORM} MATCHES "x64")
     add_subdirectory(test_uuid)
 endif()
+
+if(${PLATFORM} MATCHES "x64")
+    add_subdirectory(test_protobuf)
+endif()
