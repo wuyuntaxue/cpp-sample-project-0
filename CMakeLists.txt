@@ -4,8 +4,9 @@ project(taxue_sample VERSION 1.0.0)
 
 aux_source_directory("${PROJECT_SOURCE_DIR}/src/config/" CONFIG_SRCS)
 aux_source_directory("${PROJECT_SOURCE_DIR}/src/log/" LOG_SRCS)
+aux_source_directory("${PROJECT_SOURCE_DIR}/src/threadpool/" THREADPOOL_SRCS)
 
-add_executable(sample_exe ${PROJECT_SOURCE_DIR}/src/start.cpp ${CONFIG_SRCS} ${LOG_SRCS})
+add_executable(sample_exe ${PROJECT_SOURCE_DIR}/src/start.cpp ${CONFIG_SRCS} ${LOG_SRCS} ${THREADPOOL_SRCS})
 
 #指定c++版本
 set(CMAKE_CXX_STANDARD 17)
