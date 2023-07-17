@@ -14,6 +14,9 @@ Standard options:
 Build thread:
   -j thread nums   default: $(nproc)
 
+Build Test:
+  -t               build test
+
 Sample:
   ./build.sh -p x64
 "
@@ -23,9 +26,9 @@ target_platform=""
 build_thread=$(nproc)
 
 # 是否编译test模块
-is_build_test="YES"
+is_build_test="NO"
 
-while getopts "p:hj:" arg
+while getopts "p:htj:" arg
 do
     case $arg in
     p)
@@ -37,6 +40,9 @@ do
     h)
         Usage
         exit 0
+        ;;
+    t)
+        is_build_test="YES"
         ;;
     ?)
         Usage
