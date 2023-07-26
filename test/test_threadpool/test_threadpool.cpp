@@ -27,7 +27,7 @@ static void wait_exit_signal() {
 int main() {
     LOG_INFO("start thread pool test ... ...");
 
-    ThreadPool pool;
+    TOOL::ThreadPool pool;
     pool.start(3, "lamba");
 
     for (int i = 0; i < 20; i++) {
@@ -43,9 +43,21 @@ int main() {
 
     pool.start(2, "func");
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 10; i++) {
         pool.add_task(test_func, "test" + std::to_string(i));
     }
+
+    auto future = pool.add_task([](int i) -> int {
+        LOG_WARN("dotask func {}", i);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        return i;
+    }, 1024);
+
+    for (int i = 0; i < 10; i++) {
+        pool.add_task(test_func, "test" + std::to_string(i+100));
+    }
+
+    LOG_INFO("test get future = {}", future.get());
 
     /// 阻塞主函数，等待退出信号
     wait_exit_signal();
