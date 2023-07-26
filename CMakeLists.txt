@@ -27,6 +27,12 @@ target_include_directories(sample_exe PUBLIC
                             "${PROJECT_SOURCE_DIR}/3rd/jemalloc/include"
                             )
 
+if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+    message(STATUS "CMAKE_BUILD_TYPE : Debug")
+else()
+    message(STATUS "CMAKE_BUILD_TYPE : Release")
+endif()
+
 #添加子项目
 message(STATUS "IS_BUILD_TEST : " ${IS_BUILD_TEST})
 if (${IS_BUILD_TEST} MATCHES "YES")

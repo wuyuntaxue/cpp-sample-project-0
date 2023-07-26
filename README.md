@@ -37,12 +37,11 @@ make
 
 ```
 
+编译选项研究：-fopenmp
+
 完善test_log演示代码，研究线程名如何输出到log中，buildtime等
-
-
 获取GitHash，做成宏，用来表示版本编码
 整理buildtime宏中时间格式
-spdlog：确保多线程状态下功能正常，更多拓展功能（控制台和文件同时写的可能性）
 cmake控制的头文件
 build.sh功能完善
 ```
