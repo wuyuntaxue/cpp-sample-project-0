@@ -20,9 +20,8 @@ public:
 
 class configType {
 public:
-    configType();
-    configType(std::string filename);
     ~configType();
+    configType(const configType&) = delete;
 
     static configType &Instance() {
         static configType _instance;
@@ -38,6 +37,10 @@ public:
     void print_config();
 
     configDataType data;
+
+protected:
+    configType();
+    configType(std::string filename);
 
 private:
     int mkdirs(std::string path, mode_t mode);

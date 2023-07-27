@@ -1,13 +1,16 @@
 #include "config/config.hpp"
 #include "log/log.hpp"
+#include "threadpool/threadPool.hpp"
 
+#include <semaphore.h>
+
+#include <csignal>
 #include <iostream>
+#include <memory>
+#include <string>
 
-int main() {
-    std::cout << "taxue sample start" << std::endl;
-    // log_init(); // 初始化spd日志
-    LOG_INFO("start run ... ...");
 
+void config_file_test() {
     // 读写yaml配置文件
     configType::Instance().read_config_file("./config.yaml");
     configType::Instance().print_config();
@@ -19,8 +22,27 @@ int main() {
     configType::Instance().data.numbers.push_back(100);
 
     configType::Instance().save_config_file();
+}
 
-    // base64_test();
+
+static void wait_exit_signal() {
+    static sem_t sem;
+    sem_init(&sem, 0, 0);
+    signal(SIGINT, [](int) {
+        LOG_WARN("recv exit signal");
+        sem_post(&sem);
+    });
+
+    sem_wait(&sem);
+    sem_destroy(&sem);
+}
+
+int main() {
+    std::cout << "taxue sample start" << std::endl;
+    LOG_INFO("start run ... ...");
+
+    /// 阻塞主函数，等待退出信号
+    wait_exit_signal();
 
     LOG_WARN("sample project done, goodbye(^_^)\n......");
     log_drop(); // 释放日志

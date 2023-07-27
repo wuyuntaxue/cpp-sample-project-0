@@ -15,3 +15,9 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/x64)
 #设置可执行文件输出位置
 
 set(PLATFORM "x64" CACHE STRING "")
+
+set(CMAKE_CXX_FLAGS_DEBUG      "${CMAKE_CXX_FLAGS_DEBUG} -O0 -Wall -Wextra \
+                                -g -ggdb -fstack-protector-strong -fsanitize=leak -fsanitize=address \
+                                -fno-omit-frame-pointer")
+
+set(CMAKE_CXX_FLAGS_RELEASE    "${CMAKE_CXX_FLAGS_RELEASE} -O3 -Wall -W -Wextra -Werror=return-type")
