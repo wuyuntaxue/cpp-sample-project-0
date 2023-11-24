@@ -41,6 +41,33 @@ int main() {
     std::cout << "taxue sample start" << std::endl;
     LOG_INFO("start run ... ...");
 
+#if DEBUG
+    // test fsanitize stack-buffer-overflow
+    {
+        LOG_WARN("test start");
+        int buf[10];
+
+        for (int i = 0; i < 12; i++) {
+            buf[i] = i;
+        }
+
+        if (buf[10] == 10) {
+            LOG_WARN("test 123");
+        }
+    }
+
+    // test fsanitize heap-use-after-free
+    {
+        char *buf2 = new char[100];
+        memset(buf2, 0, 100);
+        delete[] buf2;
+
+        memset(buf2, 0, 100);
+    }
+#endif
+    // std::cout << "decoder test" << "%s" << "123" << std::endl;
+    // std::cout.set
+
     /// 阻塞主函数，等待退出信号
     wait_exit_signal();
 

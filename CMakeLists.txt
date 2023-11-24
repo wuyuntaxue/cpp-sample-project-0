@@ -29,6 +29,7 @@ target_include_directories(sample_exe PUBLIC
 
 if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
     message(STATUS "CMAKE_BUILD_TYPE : Debug")
+    add_definitions(-DDEBUG=1)
 else()
     message(STATUS "CMAKE_BUILD_TYPE : Release")
 endif()

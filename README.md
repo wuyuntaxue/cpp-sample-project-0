@@ -44,8 +44,10 @@ make
 整理buildtime宏中时间格式
 cmake控制的头文件
 build.sh功能完善
+zlib
 ```
 
+[zlib](http://zlib.net/)
 
 
 ### 修改记录
